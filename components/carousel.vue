@@ -40,8 +40,8 @@ const { carousels } = defineProps({carousels: {
 
 <style>
 .carousel-inner img {
-  width: 1200px;
-  height: 500px;
+  width: 900px;
+  height: 600px;
 }
 
 .img-border {

@@ -20,7 +20,7 @@
         </thead>
         <tbody>
         <tr v-for="(car, index) in filteredCars" :key="index">
-          <td>{{ car.id }}</td>
+          <td><NuxtLink :to="`/${car.id}`">{{ car.id }}</NuxtLink></td>
           <td>{{ car.year }}</td>
           <td>{{ car.make }}</td>
           <td>{{ car.model }}</td>
@@ -36,11 +36,13 @@
   
   <script setup>
     const title = 'Fetching User Data from API into Grid'
-    const {data: cars} = await useFetch('https://car-data.p.rapidapi.com/cars', { headers: { 'X-RapidAPI-Key': '4603739451msh15f9addc67ed099p1b3420jsnf01062794b43', 'X-RapidAPI-Host': 'car-data.p.rapidapi.com' } })
+    const {data: cars} = await useFetch('/api/cars')
+    console.log(cars)
+    console.log(cars.value)
     const search = ref(''); 
     
     const filteredCars = computed(()=> {           
-            return cars.value.filter((car)=> {
+            return cars.value.data.filter((car)=> {
                 
                 return (car.make.toLowerCase().match(search.value.toLowerCase()) ||
                 car.model.toLowerCase().match(search.value.toLowerCase()) ||
@@ -51,7 +53,8 @@
             })
     })
         
-        
+
+   
     
   </script>
   
